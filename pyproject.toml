@@ -1,0 +1,35 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "spawn-decrypt"
+version = "0.0.1"
+description = "CLI tools for Spawn authorization & decryption"
+authors = [{ name="AllPeople Corporation", email="spawn.id.0000@gmail.com" }]
+requires-python = ">=3.7"
+dependencies = [
+  "requests",
+  "cryptography",
+  "mutagen",
+  "arweave-python-client",
+  "Pillow",
+  "python-dotenv",
+]
+
+[project.scripts]
+spawn-gui = "spawn_decrypt.gui:main"
+spawn-authorize = "spawn_decrypt.__main__:run_authorize"
+spawn-decrypt   = "spawn_decrypt.__main__:run_decrypt"
+
+[tool.setuptools.packages.find]
+where  = ["src"]
+include = ["spawn_decrypt*"]
+exclude = ["spawn_decrypt.exclude_from_executable*"]
+
+[tool.setuptools.package-data]
+"spawn_decrypt" = [
+  "logo.png",
+  "*.so",
+  "*.dylib"
+]
