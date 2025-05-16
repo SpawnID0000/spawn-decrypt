@@ -5,6 +5,7 @@ from pathlib import Path
 
 from .author import authorize
 from .decrypt import decrypt_asset
+from .wallet_gen import save_wallet_jwk
 
 
 def parse_args_for_authorize():
@@ -96,6 +97,9 @@ def main():
         args = parser.parse_args()
         args.func()
 
+def run_gen_wallet():
+    out_path = save_wallet_jwk(args.output)
+    print(f"Wallet JSON written to {out_path}")
 
 if __name__ == "__main__":
     main()

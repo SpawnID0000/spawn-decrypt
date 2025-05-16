@@ -1,7 +1,5 @@
 # src/spawn_decrypt/decrypt.py
 """
-Version 0.0.5
-
 Module: Provides `decrypt_asset` function to fetch, decrypt, and reassemble a Spawn-protected .m4a file.
 """
 
@@ -422,7 +420,11 @@ def decrypt_asset(
             embed_metadata_and_cover(str(out_path), tmpdir, spawn_id)
             inject_original_container_metadata(tmpdir, spawn_id, str(out_path))
 
-        print(f"✅ Decrypted audio saved as: {out_path}")
+        msg = f"✅ Decrypted audio saved as: {out_path}"
+        try:
+            print(msg)
+        except UnicodeEncodeError:
+            print(msg.encode('utf-8', 'replace').decode('ascii', 'ignore'))
         return 0
 
     except Exception as e:

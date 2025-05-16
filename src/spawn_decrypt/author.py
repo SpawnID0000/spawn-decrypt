@@ -1,7 +1,5 @@
 # src/spawn_decrypt/author.py
 """
-Version 0.0.5
-
 Module: Provides `authorize` function to onboard a new user to a Spawn contract.
 """
 
@@ -201,7 +199,12 @@ def authorize(
             #print(f"    [DEBUG] payload['user'] = {user!r}")
 
             if user == user_addr:
-                print(f"✅ {user_addr} already authorized by TX {txid}; skipping.")
+                msg = f"✅ {user_addr} already authorized by TX {txid}; skipping."
+                try:
+                    print(msg)
+                except UnicodeEncodeError:
+                    print(msg.encode('utf-8', 'replace').decode('ascii', 'ignore'))
+                return 0
                 return 0
             if user == caller_addr and not wrapped_b64:
                 wrapped_b64 = payload.get("wrappedKey")
@@ -241,9 +244,10 @@ def authorize(
         tx.add_tag("App-Action", "authorize")
         tx.add_tag("Contract", contract_tx_id)
         tx.add_tag("Content-Type", "application/json")
-        print(f"[DEBUG] Signing with {caller_path}…")
+        #print(f"[DEBUG] Signing with {caller_path}…")
         tx.sign()
-        print("[DEBUG] Sending to network…")
+        print("Sending transaction to network, which can sometimes take a few minutes to be confirmed on-chain.")
+        print("Feel free to do some jumping jacks while you wait...")
         tx.send()
     except Exception as e:
         print(f"[ERROR] Failed to build/send transaction: {e}", file=sys.stderr)
@@ -258,16 +262,43 @@ def authorize(
 
     # 7) Wait for on-chain confirmation
     status_url = f"https://arweave.net/tx/{tx.id}/status"
-    for _ in range(30):
+    tidbits = [
+        "Still waiting... how many jumping jacks have you done so far?",
+        "Still waiting, but hey - instant gratification is overrated anyway...",
+        "Still waiting. It'll totally be worth it though!",
+        "Still waiting... you're probably tired from all those jumping jacks.  Feel free to take a nap...",
+        "Still waiting... are you still sleeping?",
+        "Still waiting... maybe the network fell asleep too!",
+        "Still waiting... hmm, network conditions must be unusually busy",
+        "Still waiting... ok now even I'm growing impatient!",
+    ]
+    for i in range(100):
+        #print(f"[DEBUG] Poll iteration {i}")
         try:
             r = requests.get(status_url, timeout=10)
-            r.raise_for_status()
-            if r.json().get("status") == 200:
+            #print(f"[DEBUG] HTTP GET returned {r.status_code}")
+            if r.status_code == 200:
+                resp_json = r.json()
+                confirmations = resp_json.get("number_of_confirmations", 0)
+                block = resp_json.get("block_height")
+                #print(f"[DEBUG] status JSON: {resp_json}")
+                print(f"Authorization Tx ID: {tx.id}")
+                print(f"   block height: {block}")
                 print("✅ Authorized on-chain.")
                 return 0
-        except Exception:
-            pass
+            elif r.status_code == 202:
+                #print(f"[DEBUG] status pending (202)")
+                pass
+            else:
+                print(f"[DEBUG] unexpected HTTP status: {r.status_code}")
+        except Exception as e:
+            print(f"[DEBUG] Poll iteration {i} exception: {e}")
+        # Every 12 iterations (12 x 5s = 60s), print the next "waiting" message (wrap around if needed)
+        if i > 0 and i % 12 == 0:
+            idx = ((i // 12) - 1) % len(tidbits)
+            print(tidbits[idx])
+        #print(f"[DEBUG] Sleeping for 5s before next poll") 
         time.sleep(5)
-
-    print(f"[WARNING] Transaction still pending; check {status_url}")
+    print(f"[WARNING] I give up!  Transaction still pending, but you can check later here:")
+    print(f"          {status_url}")
     return 0
