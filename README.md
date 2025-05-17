@@ -15,7 +15,7 @@ Under the hood, spawn-decrypt wraps/unwraps AES keys with a proprietary C librar
 ## Prerequisites
 
 - **Python 3.7+**
-- **Tkinter** (for `spawn-gui`): ensure your Python build includes Tcl/Tk support. On macOS, the python.org installer bundles it; with pyenv you may need `brew install tcl-tk` and rebuild.
+- **Tkinter** (for `spawn-decrypt-gui`): ensure your Python build includes Tcl/Tk support. On macOS, the python.org installer bundles it; with pyenv you may need `brew install tcl-tk` and rebuild.
 - **MP4Box** (optional): for injecting original container data back into .m4a (if installed, available on $PATH).
 
 ## Installation
@@ -135,7 +135,7 @@ python3 -m spawn_decrypt.wallet_gen [-o <output_path>]
 ### GUI
 
 ```bash
-spawn-gui
+spawn-decrypt-gui
 ```
 
 Opens a window with two tabs:

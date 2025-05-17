@@ -21,7 +21,7 @@ dependencies = [
 
 # Entry points for CLI & GUI
 [project.scripts]
-spawn-gui = "spawn_decrypt.gui:main"
+spawn-decrypt-gui = "spawn_decrypt.gui:main"
 spawn-authorize = "spawn_decrypt.__main__:run_authorize"
 spawn-decrypt   = "spawn_decrypt.__main__:run_decrypt"
 
