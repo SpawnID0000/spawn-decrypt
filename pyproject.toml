@@ -4,9 +4,11 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "spawn-decrypt"
-version = "0.0.2"
-description = "CLI tools for Spawn authorization & decryption"
+version = "0.0.3"
+description = "GUI & CLI tools for Spawn authorization & decryption"
 authors = [{ name="AllPeople Corporation", email="spawn.id.0000@gmail.com" }]
+readme = { file = "README.md", content-type = "text/markdown" }
+license = { file = "LICENSE" }
 requires-python = ">=3.7"
 dependencies = [
   "requests",
@@ -17,10 +19,37 @@ dependencies = [
   "python-dotenv",
 ]
 
+# Entry points for CLI & GUI
 [project.scripts]
 spawn-gui = "spawn_decrypt.gui:main"
 spawn-authorize = "spawn_decrypt.__main__:run_authorize"
 spawn-decrypt   = "spawn_decrypt.__main__:run_decrypt"
+
+[project.urls]
+Repository = "https://github.com/SpawnID0000/spawn-decrypt"
+
+# PyPI trove classifiers
+classifiers = [
+  "License :: OSI Approved :: MIT License",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.7",
+  "Programming Language :: Python :: 3.8",
+  "Programming Language :: Python :: 3.9",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Environment :: Console",
+  "Environment :: X11 Applications :: Tk"
+  "Operating System :: MacOS :: MacOS X",
+  "Operating System :: Microsoft :: Windows",
+  "Operating System :: POSIX :: Linux",
+  "Topic :: Security",
+  "Topic :: Utilities",
+  "Intended Audience :: Developers",
+]
+
+[tool.setuptools]
+# Include non-code files listed under package-data
+include-package-data = true
 
 [tool.setuptools.packages.find]
 where  = ["src"]
@@ -31,5 +60,6 @@ exclude = ["spawn_decrypt.exclude_from_executable*"]
 "spawn_decrypt" = [
   "logo.png",
   "*.so",
-  "*.dylib"
+  "*.dylib",
+  "*.dll",
 ]
