@@ -30,17 +30,36 @@ mp4box_path = shutil.which("MP4Box")
 
 
 # ─── Native crypto library setup ──────────────────────────────────────────────
+def load_spawncrypt():
+    base_dir = os.path.dirname(__file__)
+    system = platform.system()
+    machine = platform.machine().lower()
 
-def get_lib_path():
-    base = Path(__file__).parent
-    if platform.system() == "Darwin":
-        return base / "libspawncrypt.dylib"
-    elif platform.system() == "Windows":
-        return base / "libspawncrypt.dll"
-    else:  # Assume Linux
-        return base / "libspawncrypt.so"
+    if system == "Linux":
+        if "arm" in machine or "aarch64" in machine:
+            libname = "libspawncrypt_rpi.so"
+        else:
+            libname = "libspawncrypt.so"
+    elif system == "Darwin":
+        libname = "libspawncrypt.dylib"
+    elif system == "Windows":
+        libname = "libspawncrypt.dll"
+    else:
+        raise RuntimeError(f"Unsupported platform: {system} ({machine})")
 
-_lib = ctypes.CDLL(str(get_lib_path()))
+    return ctypes.CDLL(os.path.join(base_dir, libname))
+
+_lib = load_spawncrypt()
+_lib.unwrap_aes_key.argtypes = [
+    ctypes.c_char_p,
+    ctypes.POINTER(ctypes.c_ubyte), ctypes.c_size_t,
+    ctypes.POINTER(ctypes.POINTER(ctypes.c_ubyte)), ctypes.POINTER(ctypes.c_size_t)
+]
+_lib.unwrap_aes_key.restype = ctypes.c_int
+_lib.scleanup.argtypes = [ctypes.c_void_p, ctypes.c_size_t]
+_lib.scleanup.restype = None
+
+
 _lib.unwrap_aes_key.argtypes = [
     ctypes.c_char_p,
     ctypes.POINTER(ctypes.c_ubyte), ctypes.c_size_t,
