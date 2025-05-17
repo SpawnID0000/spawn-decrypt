@@ -19,15 +19,6 @@ dependencies = [
   "python-dotenv",
 ]
 
-# Entry points for CLI & GUI
-[project.scripts]
-spawn-decrypt-gui = "spawn_decrypt.gui:main"
-spawn-authorize = "spawn_decrypt.__main__:run_authorize"
-spawn-decrypt   = "spawn_decrypt.__main__:run_decrypt"
-
-[project.urls]
-Repository = "https://github.com/SpawnID0000/spawn-decrypt"
-
 # PyPI trove classifiers
 classifiers = [
   "License :: OSI Approved :: MIT License",
@@ -38,7 +29,7 @@ classifiers = [
   "Programming Language :: Python :: 3.10",
   "Programming Language :: Python :: 3.11",
   "Environment :: Console",
-  "Environment :: X11 Applications :: Tk"
+  "Environment :: X11 Applications :: Tk",
   "Operating System :: MacOS :: MacOS X",
   "Operating System :: Microsoft :: Windows",
   "Operating System :: POSIX :: Linux",
@@ -46,6 +37,16 @@ classifiers = [
   "Topic :: Utilities",
   "Intended Audience :: Developers",
 ]
+
+# Entry points for CLI & GUI
+[project.scripts]
+spawn-decrypt-gui = "spawn_decrypt.gui:main"
+spawn-authorize   = "spawn_decrypt.__main__:run_authorize"
+spawn-decrypt     = "spawn_decrypt.__main__:run_decrypt"
+
+[project.urls]
+Repository    = "https://github.com/SpawnID0000/spawn-decrypt"
+Issue-Tracker = "https://github.com/SpawnID0000/spawn-decrypt/issues"
 
 [tool.setuptools]
 # Include non-code files listed under package-data
