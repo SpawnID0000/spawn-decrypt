@@ -312,78 +312,106 @@ def decrypt_asset(
             spwn_path, spawn_id = fetch_spwn_from_contract(source)
 
         # 3. Obtain wrapped AES key
-        if key_file:
-            wrapped_bytes = Path(key_file).read_bytes()
+        wrapped_bytes = None
+        # Assign a consistent contract_tx_id for later GraphQL fallback
+        # If a new  authorization was just submitted, use that TX ID,
+        # otherwise fall back to the SPWN/package or the CLI “source” argument.
+        if auth_tx:
+            contract_tx_id = auth_tx
         else:
-            # figure out contract_tx_id
-            if auth_tx:
-                contract_tx_id = auth_tx
-            else:
-                info = json.loads(
-                    ZipFile(spwn_path, 'r').read(f"{spawn_id}_contract_info.json")
-                )
+            # If source was .spwn, pull it out of the package; else assume it's already the TX ID
+            if source.lower().endswith(".spwn") and os.path.isfile(source):
+                info = json.loads(ZipFile(source, 'r').read(f"{spawn_id}_contract_info.json"))
                 contract_tx_id = info["contractTxId"]
+            else:
+                contract_tx_id = source
 
-            # — secure-load wallet JWK and immediately delete it after use
-            with open(wallet_file, "r", encoding="utf-8") as jwf:
-                jwk = json.load(jwf)
-            caller_addr = compute_arweave_address(jwk)
-            # wipe and remove the wallet dict
-            for k in list(jwk):
-                jwk[k] = None
-            del jwk
+        if auth_tx:
+            # 3a) Directly fetch our new authorize interaction from the gateway
+            url = f"https://arweave.net/tx/{auth_tx}/data"
+            r = requests.get(url, timeout=10)
+            r.raise_for_status()
+            try:
+                payload = r.json()
+            except ValueError:
+                # fallback to raw base64 decode
+                raw = r.content
+                pad = b"=" * ((4 - len(raw) % 4) % 4)
+                payload = json.loads(base64.urlsafe_b64decode(raw + pad))
 
-            # ——— GraphQL lookup ———
-            gql = {
-                "query": f"""
-                {{
-                  transactions(
-                    tags: [
-                      {{ name: "App-Name",  values: ["SmartWeaveAction"] }},
-                      {{ name: "Contract",  values: ["{contract_tx_id}"] }},
-                      {{ name: "App-Action", values: ["authorize"] }}
-                    ],
-                    first: 100,
-                    sort: HEIGHT_DESC
-                  ) {{ edges {{ node {{ id }} }} }}
-                }}
-                """
-            }
-            resp = requests.post("https://arweave.net/graphql", json=gql, timeout=5)
-            resp.raise_for_status()
-            edges = resp.json()["data"]["transactions"]["edges"]
+            b64 = payload.get("wrappedKey")
+            if b64:
+                pad = "=" * ((4 - len(b64) % 4) % 4)
+                wrapped_bytes = base64.urlsafe_b64decode(b64 + pad)
 
-            wrapped_b64 = None
-            for edge in edges:
-                txid = edge["node"]["id"]
-                try:
-                    r = requests.get(f"https://arweave.net/{txid}", timeout=5)
-                    r.raise_for_status()
-                    raw_bytes = r.content
-                except Exception:
-                    continue
+        if wrapped_bytes is None:
+            # 3b) Fallback to key_file or GraphQL lookup against the Spawn contract
+            if key_file:
+                # admin/agent flow: read the pre-wrapped key directly
+                wrapped_bytes = Path(key_file).read_bytes()
+            else:
+                # contract-mode: find the last authorize interaction on the Spawn contract
+                # (note: use the *contract* TX ID, not the auth_tx here)
+                # secure-load wallet to get caller_addr
+                with open(wallet_file, "r", encoding="utf-8") as jwf:
+                    jwk = json.load(jwf)
+                caller_addr = compute_arweave_address(jwk)
+                # zero out the in-memory jwk for safety
+                for k in list(jwk):
+                    jwk[k] = None
+                del jwk
 
-                # parse JSON or base64‐wrapped JSON
-                try:
-                    payload = json.loads(raw_bytes)
-                except Exception:
-                    pad = b"=" * ((4 - len(raw_bytes) % 4) % 4)
+                # ——— GraphQL lookup ———
+                gql = {
+                    "query": f"""
+                    {{
+                      transactions(
+                        tags: [
+                          {{ name: "App-Name",  values: ["SmartWeaveAction"] }},
+                          {{ name: "Contract",  values: ["{contract_tx_id}"] }},
+                          {{ name: "App-Action", values: ["authorize"] }}
+                        ],
+                        first: 100,
+                        sort: HEIGHT_DESC
+                      ) {{ edges {{ node {{ id }} }} }}
+                    }}
+                    """
+                }
+                resp = requests.post("https://arweave.net/graphql", json=gql, timeout=10)
+                resp.raise_for_status()
+                edges = resp.json()["data"]["transactions"]["edges"]
+
+                wrapped_b64 = None
+                for edge in edges:
+                    txid = edge["node"]["id"]
                     try:
-                        payload = json.loads(base64.urlsafe_b64decode(raw_bytes + pad))
+                        r = requests.get(f"https://arweave.net/tx/{txid}/data", timeout=10)
+                        r.raise_for_status()
+                        raw_bytes = r.content
                     except Exception:
                         continue
 
-                if payload.get("user", "").rstrip("=") == caller_addr.rstrip("="):
-                    wrapped_b64 = payload.get("wrappedKey")
-                    break
+                    # parse JSON or base64‐wrapped JSON
+                    try:
+                        payload = json.loads(raw_bytes)
+                    except Exception:
+                        pad = b"=" * ((4 - len(raw_bytes) % 4) % 4)
+                        try:
+                            payload = json.loads(base64.urlsafe_b64decode(raw_bytes + pad))
+                        except Exception:
+                            continue
 
-            if not wrapped_b64:
-                raise RuntimeError(f"No wrappedKey found for {caller_addr}")
+                    if payload.get("user", "").rstrip("=") == caller_addr.rstrip("="):
+                        wrapped_b64 = payload.get("wrappedKey")
+                        break
 
-            # decode to bytes
-            wrapped_bytes = base64.urlsafe_b64decode(
-                wrapped_b64 + "=" * ((4 - len(wrapped_b64) % 4) % 4)
-            )
+                if not wrapped_b64:
+                    raise RuntimeError(f"No wrappedKey found for {caller_addr}")
+
+                # decode to bytes
+                wrapped_bytes = base64.urlsafe_b64decode(
+                    wrapped_b64 + "=" * ((4 - len(wrapped_b64) % 4) % 4)
+                )
 
         # 4. Native unwrap AES key
         wrapped_buf = bytearray(wrapped_bytes)
@@ -439,7 +467,7 @@ def decrypt_asset(
             embed_metadata_and_cover(str(out_path), tmpdir, spawn_id)
             inject_original_container_metadata(tmpdir, spawn_id, str(out_path))
 
-        msg = f"✅ Decrypted audio saved as: {out_path}"
+        msg = f"Decrypted audio saved as: {out_path}\n"
         try:
             print(msg)
         except UnicodeEncodeError:

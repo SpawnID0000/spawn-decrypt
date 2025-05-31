@@ -1,0 +1,95 @@
+{
+  "playlist": {
+    "title": "The Washouts (Mountainside EP)",
+    "creator": "The Washouts",
+    "annotation": "",
+    "info": "",
+    "location": "",
+    "identifier": "",
+    "image": "",
+    "date": "",
+    "license": "",
+    "attribution": [{"identifier": ""}, {"location": ""}],
+    "link": [{"urn:ardrive:data_tx_id": ""}],
+    "meta": [{"urn:ardrive:metadata_tx_id": ""}],
+    "extension": {
+      "urn:spawnSPF:type": ["ep"],
+      "urn:spawnSPF:total_duration": [712038],
+      "urn:spawnSPF:total_tracks": [4]
+    },
+    "track": [
+      {
+        "location": ["../linx/E78FF075", "../../aux/user/linx/E78FF075"],
+        "identifier": ["urn:spawnid:E78FF075"],
+        "title": "Tomorrow",
+        "creator": "The Washouts",
+        "annotation": "",
+        "info": "",
+        "image": "",
+        "album": "The Washouts (Mountainside EP)",
+        "trackNum": 1,
+        "duration": 151394,
+        "link": [{"urn:ardrive:data_tx_id": "https://arweave.net/c0y4QD8MTcNupUSVSLjYd15RfaQntIw-R2LzyydI7xM"}],
+        "meta": [{"urn:ardrive:metadata_tx_id": "https://arweave.net/JpLvu5lPfx8lK0DyxUdRvxf2dhgI8e0p3e9mIvFORf0"}],
+        "extension": {
+          "urn:spawnSPF:contract": ["https://arweave.net/tx/c0ZYiDxKCCA9URjJgAXqUZA1P6M9VACRdMtEYhnd1t0"],
+          "urn:liquidsoap:cue_fade": [{"liq_cue_in": 0}, {"liq_fade_in": 0}, {"liq_fade_out": 0}]
+        }
+      },
+      {
+        "location": ["../linx/76628DFE", "../../aux/user/linx/76628DFE"],
+        "identifier": ["urn:spawnid:76628DFE"],
+        "title": "Stuck Inside",
+        "creator": "The Washouts",
+        "annotation": "",
+        "info": "",
+        "image": "",
+        "album": "The Washouts (Mountainside EP)",
+        "trackNum": 2,
+        "duration": 152113,
+        "link": [{"urn:ardrive:data_tx_id": "https://arweave.net/jCIfQAPjGYfA1a1yKHrtmJkLz71kUiDUjI7f_Oaut3I"}],
+        "meta": [{"urn:ardrive:metadata_tx_id": "https://arweave.net/iIlVrq9MGcZaYHiFXUE8E-Jrs0YvpoZm0C13lUXDvNc"}],
+        "extension": {
+          "urn:spawnSPF:contract": ["https://arweave.net/tx/o8BcPE-5vy18z7g6bGZ6eN2cy5U0cEcoeEN_7w3FpzI"],
+          "urn:liquidsoap:cue_fade": [{"liq_cue_in": 0}, {"liq_fade_in": 0}, {"liq_fade_out": 0}]
+        }
+      },
+      {
+        "location": ["../linx/CCE02707", "../../aux/user/linx/CCE02707"],
+        "identifier": ["urn:spawnid:CCE02707"],
+        "title": "Twelve Days",
+        "creator": "The Washouts",
+        "annotation": "",
+        "info": "",
+        "image": "",
+        "album": "The Washouts (Mountainside EP)",
+        "trackNum": 3,
+        "duration": 218824,
+        "link": [{"urn:ardrive:data_tx_id": "https://arweave.net/xAuTOo9DuIg1TwHmD5j_UU5EEuLlM5BxYfxzOKmNWeE"}],
+        "meta": [{"urn:ardrive:metadata_tx_id": "https://arweave.net/LUogbaTufxyYRvDejw5OQ-cbSTvK6Wg0qjUIPF3buww"}],
+        "extension": {
+          "urn:spawnSPF:contract": ["https://arweave.net/tx/SqIYQF66z11av4IDs06rE_t1lpkW8n7yeW5Mym5jaWU"],
+          "urn:liquidsoap:cue_fade": [{"liq_cue_in": 0}, {"liq_fade_in": 0}, {"liq_fade_out": 0}]
+        }
+      },
+      {
+        "location": ["../linx/AA361C15", "../../aux/user/linx/AA361C15"],
+        "identifier": ["urn:spawnid:AA361C15"],
+        "title": "Mountainside",
+        "creator": "The Washouts",
+        "annotation": "",
+        "info": "",
+        "image": "",
+        "album": "The Washouts (Mountainside EP)",
+        "trackNum": 4,
+        "duration": 189707,
+        "link": [{"urn:ardrive:data_tx_id": "https://arweave.net/GKRHsEHhlSnvNgXG9pjjUuKE4ZrMfbAtt6Rlkxh4JD8"}],
+        "meta": [{"urn:ardrive:metadata_tx_id": "https://arweave.net/h_ZQn64y42wKcq7KrHuD7uWNDU3zK5uVR3vvVQ-xgaI"}],
+        "extension": {
+          "urn:spawnSPF:contract": ["https://arweave.net/tx/ZQHeV-VRtn02mSFQaBYESrmLddXtvhT8kOVoFNlYQos"],
+          "urn:liquidsoap:cue_fade": [{"liq_cue_in": 0}, {"liq_fade_in": 0}, {"liq_fade_out": 0}]
+        }
+      }
+    ]
+  }
+}
