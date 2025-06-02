@@ -21,6 +21,63 @@ from dotenv import load_dotenv, set_key
 from .author import authorize, compute_arweave_address
 from .decrypt import decrypt_asset
 from .wallet_gen import save_wallet_jwk
+from requests.exceptions import JSONDecodeError
+
+def sync_remote_directory(owner: str, repo: str, branch: str, subdir: str, local_dir: Path):
+    """
+    Syncs everything under:
+      https://api.github.com/repos/{owner}/{repo}/contents/{subdir}?ref={branch}
+    down into local_dir, only grabbing files that aren’t already present locally.
+
+    owner/repo/branch/subdir examples for your case:
+      owner = "SpawnID0000"
+      repo  = "spawn-decrypt"
+      branch = "main"
+      subdir  = "src/spawn_decrypt/said"   (or "src/spawn_decrypt/jspf")
+
+    local_dir should be Path(__file__).parent / "said"  (or / "jspf").
+    """
+    # 1) Call GitHub Contents API
+    url = f"https://api.github.com/repos/{owner}/{repo}/contents/{subdir}"
+    params = {"ref": branch}
+    try:
+        r = requests.get(url, params=params, timeout=10)
+        r.raise_for_status()
+    except Exception as e:
+        print(f"[sync] Failed to list {subdir} on GitHub: {e}")
+        return
+
+    remote_items = r.json()  # a list of dicts, each with 'name', 'type', 'download_url', etc.
+
+    # Ensure local_dir exists
+    local_dir.mkdir(parents=True, exist_ok=True)
+
+    # 2) Build a set of local filenames (just the base names)
+    existing = {f.name for f in local_dir.glob("*") if f.is_file()}
+
+    for item in remote_items:
+        if item.get("type") != "file":
+            continue
+        fname = item.get("name", "")
+        if not fname.endswith((".said", ".jspf")):
+            continue
+
+        if fname not in existing:
+            # 3) Download it
+            dl_url = item.get("download_url")
+            if not dl_url:
+                continue
+            try:
+                resp = requests.get(dl_url, timeout=10)
+                resp.raise_for_status()
+            except Exception as e:
+                print(f"[sync] Failed to download {fname}: {e}")
+                continue
+
+            dest = local_dir / fname
+            with open(dest, "wb") as out_f:
+                out_f.write(resp.content)
+            print(f"[sync] Pulled new file: {fname}")
 
 class GuiStdout:
     """File-like stdout that sends each line to self._log immediately."""
@@ -59,11 +116,30 @@ def run_in_thread(fn, callback, *args, **kwargs):
 
 
 class SpawnGUI(tk.Tk):
-    def __init__(self):
-        super().__init__()
-        self.title("Spawn Decrypt GUI")
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.title("SpawnStore")
         self.geometry("850x500")
         self.minsize(850, 500)
+
+        # === Sync new .said and .jspf from GitHub ===
+        base = Path(__file__).parent
+        # Local directories (where gui.py expects to find said/ and jspf/)
+        said_local = base / "said"
+        jspf_local = base / "jspf"
+
+        # GitHub repo info
+        owner  = "SpawnID0000"
+        repo   = "spawn-decrypt"
+        branch = "main"
+
+        # Remote subdirs inside the GitHub repo
+        said_subdir = "src/spawn_decrypt/said"
+        jspf_subdir = "src/spawn_decrypt/jspf"
+
+        # Sync both directories
+        sync_remote_directory(owner, repo, branch, said_subdir, said_local)
+        sync_remote_directory(owner, repo, branch, jspf_subdir, jspf_local)
 
         # Setup settings.env in the package directory (creates file if missing)
         self.env_path = Path(__file__).parent / "settings.env"
@@ -605,12 +681,17 @@ class SpawnGUI(tk.Tk):
         ttk.Label(parent, text="Artist:")\
             .grid(row=8, column=1, sticky="e", padx=5, pady=5)
         self.artist_var = tk.StringVar()
+
+        # Combine JSPF artists and SAID artists into one sorted list:
+        combined_artists = sorted(
+           set(self.all_jspf_artists) | set(self.all_artists)
+        )
         self.artist_cb = ttk.Combobox(
-            parent,
-            textvariable=self.artist_var,
-            values=self.all_jspf_artists,
-            state="readonly",
-            width=50
+           parent,
+           textvariable=self.artist_var,
+           values=combined_artists,
+           state="readonly",
+           width=50
         )
         self.artist_cb.grid(row=8, column=2, sticky="w")
         self.artist_cb.bind("<<ComboboxSelected>>", self._on_artist_selected)
@@ -643,6 +724,47 @@ class SpawnGUI(tk.Tk):
         self.track_cb.grid(row=10, column=2, sticky="w")
         self.track_cb.bind("<<ComboboxSelected>>", self._on_track_selected)
 
+        # Price display (AR + USD)
+        self.price_var = tk.StringVar(value="–")
+        tk.Label(self.main_frame, text="Price:")\
+            .grid(row=11, column=2, sticky="w", padx=15, pady=(0,10))
+        self.price_entry = tk.Entry(
+            self.main_frame,
+            textvariable=self.price_var,
+            state="readonly",
+            width=30
+        )
+        self.price_entry.grid(row=11, column=2, columnspan=2, sticky="w", padx=75, pady=(0,10))
+
+    def _update_price_display(self):
+        """
+        Build the list of contract IDs (txids) either
+        from the currently selected album’s tracks, or
+        from the single-track Source box, then spawn
+        a background thread to fetch & sum their prices.
+        """
+        # 1) Gather txids
+        txids = []
+        if self.album_var.get():
+            # album mode: each track entry in current_album_record["tracks"]
+            for tr in self.current_album_record.get("tracks", []):
+                # JSPF track objects usually put the tx in "identifier"
+                cid = tr.get("identifier") or tr.get("contx_id")
+                if cid:
+                    txids.append(cid)
+        else:
+            # single‐track mode: whatever’s in the Source field
+            src = self.source_var.get().strip()
+            if src:
+                txids = [src]
+
+        # 2) Fire off the fetch/sum in a daemon thread
+        threading.Thread(
+            target=self._fetch_and_set_price,
+            args=(txids,),
+            daemon=True
+        ).start()
+
     def _on_artist_selected(self, evt):
         """
         When an artist is picked, populate the Album dropdown
@@ -657,9 +779,17 @@ class SpawnGUI(tk.Tk):
         if albums:
             # Auto‐select the first album
             self.album_var.set(albums[0])
+            # Clear any existing Track selection; actual track list will be populated in _on_album_selected
+            self.track_cb.configure(values=[])
+            self.track_var.set("")
+            # Immediately trigger album‐selected logic so Price updates without extra click
+            self._on_album_selected(None)
         else:
-            # No albums: clear selection
+            # No JSPF albums: clear album selection and show only this artist’s SAID tracks
             self.album_var.set("")
+            said_tracks = self.artist_to_tracks.get(artist, [])
+            self.track_cb.configure(values=said_tracks)
+            self.track_var.set("")
 
         # Clear any existing Track selection
         self.track_var.set("")
@@ -694,13 +824,18 @@ class SpawnGUI(tk.Tk):
                 ]
             except Exception:
                 tracks = []
+            rec["tracks"] = data.get("playlist", {}).get("track", [])
+            self.current_album_record = rec
         else:
             # Fallback: if no JSPF match, show all SAID-based tracks
             tracks = self.all_tracks
+            self.current_album_record = {"tracks": []}
 
         # Populate the Track combobox with the new options, but clear any current selection
         self.track_cb.configure(values=tracks)
         self.track_var.set("")
+        # refresh price display whenever track or album changes
+        self._update_price_display()
 
     def _on_track_selected(self, evt):
         """
@@ -725,6 +860,8 @@ class SpawnGUI(tk.Tk):
             self.source_var.set(cid)
             # to also use it in the Authorize tab:
             self.contract_var.set(cid)
+        # refresh price display whenever track or album changes
+        self._update_price_display()
 
 
     # Button callbacks
@@ -1052,6 +1189,54 @@ class SpawnGUI(tk.Tk):
         self.new_wallet_var.set(path)
         self.dec_wallet_var.set(path)
         self.main_wallet_var.set(path)
+
+    def _fetch_and_set_price(self, txids):
+        total_winston = 0
+        for txid in txids:
+            # 1) fetch the tx JSON, skip on any decode/network error
+            try:
+                resp = requests.get(f"https://arweave.net/tx/{txid}?format=json", timeout=10)
+                data = resp.json()
+            except (requests.RequestException, JSONDecodeError):
+                # could not fetch or parse JSON → skip this txid
+                continue
+
+            # 2) safely pull out the Init-State tag
+            b64 = None
+            for tag in data.get("tags", []):
+                if tag.get("name") in ("Init-State", "QW5pdC1TdGF0ZQ"):
+                    b64 = tag.get("value")
+                    break
+            if not b64:
+                continue
+
+            # 3) decode & parse JSON payload
+            try:
+                state = json.loads(base64.b64decode(b64))
+            except Exception:
+                continue
+
+            # 4) accumulate the price
+            total_winston += int(state.get("price", 0))
+
+        # 5) convert winston → AR
+        total_ar = total_winston / 1e12
+
+        # 6) fetch AR→USD rate, skip on any error
+        try:
+            cg = requests.get(
+                "https://api.coingecko.com/api/v3/simple/price",
+                params={"ids": "arweave", "vs_currencies": "usd"},
+                timeout=5
+            ).json()
+            rate = cg.get("arweave", {}).get("usd", 0)
+        except (requests.RequestException, JSONDecodeError):
+            rate = 0
+        total_usd = total_ar * rate
+
+        # 7) update the UI on the main thread
+        disp = f"{total_ar:.6f} AR / ${total_usd:,.2f}"
+        self.after(0, lambda: self.price_var.set(disp))
 
 if __name__ == "__main__":
     app = SpawnGUI()

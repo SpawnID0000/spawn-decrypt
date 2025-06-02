@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "spawn-decrypt"
-version = "0.0.6"
+version = "0.0.7"
 description = "GUI & CLI tools for Spawn authorization & decryption"
 authors = [{ name="AllPeople Corporation", email="spawn.id.0000@gmail.com" }]
 readme = { file = "README.md", content-type = "text/markdown" }
