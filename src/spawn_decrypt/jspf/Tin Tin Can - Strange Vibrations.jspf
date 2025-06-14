@@ -1,0 +1,185 @@
+{
+  "playlist": {
+    "title": "Strange Vibrations",
+    "creator": "Tin Tin Can",
+    "annotation": "",
+    "info": "",
+    "location": "",
+    "identifier": "",
+    "image": "",
+    "date": "",
+    "license": "",
+    "attribution": [{"identifier": ""}, {"location": ""}],
+    "link": [{"urn:ardrive:data_tx_id": ""}],
+    "meta": [{"urn:ardrive:metadata_tx_id": ""}],
+    "extension": {
+      "urn:spawnSPF:type": ["lp"],
+      "urn:spawnSPF:total_duration": [2211000],
+      "urn:spawnSPF:total_tracks": [9]
+    },
+    "track": [
+      {
+        "location": ["../linx/BC4BFE7D", "../../aux/user/linx/BC4BFE7D"],
+        "identifier": ["urn:spawnid:BC4BFE7D"],
+        "title": "Year of the Rat",
+        "creator": "Tin Tin Can",
+        "annotation": "",
+        "info": "",
+        "image": "",
+        "album": "Strange Vibrations",
+        "trackNum": 1,
+        "duration": 251448,
+        "link": [{"urn:ardrive:data_tx_id": "https://arweave.net/NMF_7y_XIZleLU7OshtkH82DevBHlK4_p5tipRwptCI"}],
+        "meta": [{"urn:ardrive:metadata_tx_id": "https://arweave.net/U8Tveuqu3jigHNZb2aaxNnCipduvq41URZ4SnWWX9bs"}],
+        "extension": {
+          "urn:spawnSPF:contract": ["https://arweave.net/tx/JEewu5_cmThT80QOFttmDZ9iRbWhLYHDPkTyTT41GGE"],
+          "urn:liquidsoap:cue_fade": [{"liq_cue_in": 0}, {"liq_fade_in": 0}, {"liq_fade_out": 0}]
+        }
+      },
+      {
+        "location": ["../linx/3964F117", "../../aux/user/linx/3964F117"],
+        "identifier": ["urn:spawnid:3964F117"],
+        "title": "City Lights",
+        "creator": "Tin Tin Can",
+        "annotation": "",
+        "info": "",
+        "image": "",
+        "album": "Strange Vibrations",
+        "trackNum": 2,
+        "duration": 271952,
+        "link": [{"urn:ardrive:data_tx_id": "https://arweave.net/ISfAdzvF5euXtK8ShFo6_2lxaKad_uBM_oLLecWHo_E"}],
+        "meta": [{"urn:ardrive:metadata_tx_id": "https://arweave.net/A2QT7r99j2cvDtaojH4T4iDFUM0-X9qCt81w2OZK7vg"}],
+        "extension": {
+          "urn:spawnSPF:contract": ["https://arweave.net/tx/Hvo0RbnkZHPMCPaEbh6ixW--lKaGr2B31Ujce70kBdU"],
+          "urn:liquidsoap:cue_fade": [{"liq_cue_in": 0}, {"liq_fade_in": 0}, {"liq_fade_out": 0}]
+        }
+      },
+      {
+        "location": ["../linx/C210D1FC", "../../aux/user/linx/C210D1FC"],
+        "identifier": ["urn:spawnid:C210D1FC"],
+        "title": "C'mon Michael",
+        "creator": "Tin Tin Can",
+        "annotation": "",
+        "info": "",
+        "image": "",
+        "album": "Strange Vibrations",
+        "trackNum": 3,
+        "duration": 190148,
+        "link": [{"urn:ardrive:data_tx_id": "https://arweave.net/6HrRA2h9ZJSdNtXoBVpMeUko_xD5yAt0tCWS9suDbZs"}],
+        "meta": [{"urn:ardrive:metadata_tx_id": "https://arweave.net/tW5yFjJtsBLgBBP-ZFeyc0aYum--yDQoYsfIUG8MHtA"}],
+        "extension": {
+          "urn:spawnSPF:contract": ["https://arweave.net/tx/-uhTFATqb82TkCD_K88T6T3Gde1tyXSgxY-tyQhzaVg"],
+          "urn:liquidsoap:cue_fade": [{"liq_cue_in": 0}, {"liq_fade_in": 0}, {"liq_fade_out": 0}]
+        }
+      },
+      {
+        "location": ["../linx/6C7A8E4F", "../../aux/user/linx/6C7A8E4F"],
+        "identifier": ["urn:spawnid:6C7A8E4F"],
+        "title": "Marie Antoinette",
+        "creator": "Tin Tin Can",
+        "annotation": "",
+        "info": "",
+        "image": "",
+        "album": "Strange Vibrations",
+        "trackNum": 4,
+        "duration": 187245,
+        "link": [{"urn:ardrive:data_tx_id": "https://arweave.net/u8Ftns7Ct4adnSApfAiedxot_8eFYSVKnAJs5_15Oec"}],
+        "meta": [{"urn:ardrive:metadata_tx_id": "https://arweave.net/xIWOjduIqL2cmpqfYl8M3VuAc9_6t_ItF27pI0kBxmc"}],
+        "extension": {
+          "urn:spawnSPF:contract": ["https://arweave.net/tx/mcQpnyfw1LC8MeoCFX5pzuBaAudS0WDKid9R0KhiZ9E"],
+          "urn:liquidsoap:cue_fade": [{"liq_cue_in": 0}, {"liq_fade_in": 0}, {"liq_fade_out": 0}]
+        }
+      },
+      {
+        "location": ["../linx/B17C6F74", "../../aux/user/linx/B17C6F74"],
+        "identifier": ["urn:spawnid:B17C6F74"],
+        "title": "Wrecking Ball",
+        "creator": "Tin Tin Can",
+        "annotation": "",
+        "info": "",
+        "image": "",
+        "album": "Strange Vibrations",
+        "trackNum": 5,
+        "duration": 214831,
+        "link": [{"urn:ardrive:data_tx_id": "https://arweave.net/k_LUhCwntF2Q5witjA3PFpOM4Q0oBpTGA1E1yMU5HDg"}],
+        "meta": [{"urn:ardrive:metadata_tx_id": "https://arweave.net/OSwW8NKs_3pAogITPLDwZUfOiFmnHIB83fUa75n3-7s"}],
+        "extension": {
+          "urn:spawnSPF:contract": ["https://arweave.net/tx/V5AWFFI5l4_uYNRfMHtVuSscDWn5-g-6ZggC_0v8X0c"],
+          "urn:liquidsoap:cue_fade": [{"liq_cue_in": 0}, {"liq_fade_in": 0}, {"liq_fade_out": 0}]
+        }
+      },
+      {
+        "location": ["../linx/DD3361EA", "../../aux/user/linx/DD3361EA"],
+        "identifier": ["urn:spawnid:DD3361EA"],
+        "title": "Orbital Planes",
+        "creator": "Tin Tin Can",
+        "annotation": "",
+        "info": "",
+        "image": "",
+        "album": "Strange Vibrations",
+        "trackNum": 6,
+        "duration": 302997,
+        "link": [{"urn:ardrive:data_tx_id": "https://arweave.net/CGth5vSURG-OQs4AJKc4c32P4eLJU3UiK_MPqmqkkaI"}],
+        "meta": [{"urn:ardrive:metadata_tx_id": "https://arweave.net/nqK1nBgDwGX5Cg8N8jv3ZtgZTdX1oTeRghDbpfq7g1k"}],
+        "extension": {
+          "urn:spawnSPF:contract": ["https://arweave.net/tx/-i8Q1G5bFOHu-fow3mR-mi0IsJWqDErA5GjQHoXK8Pk"],
+          "urn:liquidsoap:cue_fade": [{"liq_cue_in": 0}, {"liq_fade_in": 0}, {"liq_fade_out": 0}]
+        }
+      },
+      {
+        "location": ["../linx/84E46EF3", "../../aux/user/linx/84E46EF3"],
+        "identifier": ["urn:spawnid:84E46EF3"],
+        "title": "What Fireworks",
+        "creator": "Tin Tin Can",
+        "annotation": "",
+        "info": "",
+        "image": "",
+        "album": "Strange Vibrations",
+        "trackNum": 7,
+        "duration": 193352,
+        "link": [{"urn:ardrive:data_tx_id": "https://arweave.net/9Z5ynmkL0pK6sL_HHF3qdSXc8R3Q4JXchP6L9e11LwE"}],
+        "meta": [{"urn:ardrive:metadata_tx_id": "https://arweave.net/6DQx-0DvuFp3u8mZMgcFe8qhYiUY_8xXZKtKIDAQra0"}],
+        "extension": {
+          "urn:spawnSPF:contract": ["https://arweave.net/tx/Rfa1GtYzlpN_qpD9k2pmG9rm_upemEBcX_Ngp0SKTdk"],
+          "urn:liquidsoap:cue_fade": [{"liq_cue_in": 0}, {"liq_fade_in": 0}, {"liq_fade_out": 0}]
+        }
+      },
+      {
+        "location": ["../linx/59434ED6", "../../aux/user/linx/59434ED6"],
+        "identifier": ["urn:spawnid:59434ED6"],
+        "title": "God Ain't to Blame",
+        "creator": "Tin Tin Can",
+        "annotation": "",
+        "info": "",
+        "image": "",
+        "album": "Strange Vibrations",
+        "trackNum": 8,
+        "duration": 298399,
+        "link": [{"urn:ardrive:data_tx_id": "https://arweave.net/SoGxbw0bT0g2hvMMbTfSPOlKwRF2p0WSa5VTsI7J3T4"}],
+        "meta": [{"urn:ardrive:metadata_tx_id": "https://arweave.net/rO4vHGmaI6AzbMUUg1h3vnLVgtRkqYWi0qd8dCizH30"}],
+        "extension": {
+          "urn:spawnSPF:contract": ["https://arweave.net/tx/-AbDWtfQe3qgqAkMGg5wDQcUOwt3_pHwaFpBCBcf_Cw"],
+          "urn:liquidsoap:cue_fade": [{"liq_cue_in": 0}, {"liq_fade_in": 0}, {"liq_fade_out": 0}]
+        }
+      },
+      {
+        "location": ["../linx/231753E7", "../../aux/user/linx/231753E7"],
+        "identifier": ["urn:spawnid:231753E7"],
+        "title": "Friends and Family",
+        "creator": "Tin Tin Can",
+        "annotation": "",
+        "info": "",
+        "image": "",
+        "album": "Strange Vibrations",
+        "trackNum": 9,
+        "duration": 300628,
+        "link": [{"urn:ardrive:data_tx_id": "https://arweave.net/75Gp3R9nHgu5H_ON1Q6Nk0VQz1z2466HCVT8jJqVI_c"}],
+        "meta": [{"urn:ardrive:metadata_tx_id": "https://arweave.net/Mi8CYFIa_9dO-Y710y5kV97goqi--N1QS4Ldex2Hr3A"}],
+        "extension": {
+          "urn:spawnSPF:contract": ["https://arweave.net/tx/YVBJ6s3co44dJTHnmlUmM5BFcrWVc26SdTlDMQ68-GA"],
+          "urn:liquidsoap:cue_fade": [{"liq_cue_in": 0}, {"liq_fade_in": 0}, {"liq_fade_out": 0}]
+        }
+      }
+    ]
+  }
+}
