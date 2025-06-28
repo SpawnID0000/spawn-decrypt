@@ -1,0 +1,113 @@
+{
+  "playlist": {
+    "title": "The Devil and the Mockingbird",
+    "creator": "Tin Tin Can",
+    "annotation": "",
+    "info": "",
+    "location": "",
+    "identifier": "",
+    "image": "",
+    "date": "",
+    "license": "",
+    "attribution": [{"identifier": ""}, {"location": ""}],
+    "link": [{"urn:ardrive:data_tx_id": ""}],
+    "meta": [{"urn:ardrive:metadata_tx_id": ""}],
+    "extension": {
+      "urn:spawnSPF:type": ["ep"],
+      "urn:spawnSPF:total_duration": [1134035],
+      "urn:spawnSPF:total_tracks": [5]
+    },
+    "track": [
+      {
+        "location": ["../linx/EEE4EB10", "../../aux/user/linx/EEE4EB10"],
+        "identifier": ["urn:spawnid:EEE4EB10"],
+        "title": "Arkansas",
+        "creator": "Tin Tin Can",
+        "annotation": "",
+        "info": "",
+        "image": "",
+        "album": "The Devil and the Mockingbird",
+        "trackNum": 1,
+        "duration": 208909,
+        "link": [{"urn:ardrive:data_tx_id": "https://arweave.net/zB3dlGNatan10EUEkjTfz_SEOzWhIeO_zfEehqZglvo"}],
+        "meta": [{"urn:ardrive:metadata_tx_id": "https://arweave.net/kZJKvNzbSSBnGgzdO4gQmgtLURcXD6uK_aceGH_m7lU"}],
+        "extension": {
+          "urn:spawnSPF:contract": ["https://arweave.net/tx/j1tO2nDYS9MaTIQ4rgfXVt9uqYTymuEtBfG0clmj8AU"],
+          "urn:liquidsoap:cue_fade": [{"liq_cue_in": 0}, {"liq_fade_in": 0}, {"liq_fade_out": 0}]
+        }
+      },
+      {
+        "location": ["../linx/8E2FA1B8", "../../aux/user/linx/8E2FA1B8"],
+        "identifier": ["urn:spawnid:8E2FA1B8"],
+        "title": "Celebration of the Damned",
+        "creator": "Tin Tin Can",
+        "annotation": "",
+        "info": "",
+        "image": "",
+        "album": "The Devil and the Mockingbird",
+        "trackNum": 2,
+        "duration": 229993,
+        "link": [{"urn:ardrive:data_tx_id": "https://arweave.net/zmFTNYcsUXWOYd9w60BbpTrE6YXhpLFZeZaw6BLoR2U"}],
+        "meta": [{"urn:ardrive:metadata_tx_id": "https://arweave.net/h5-PdMQfbyiZnNARlA5qKlCtsLXAibtIo_liX96DiLE"}],
+        "extension": {
+          "urn:spawnSPF:contract": ["https://arweave.net/tx/aIO6yjbbkFrpsZC5Pg-ZpzGywwMFH7KbIV-80DxbBqQ"],
+          "urn:liquidsoap:cue_fade": [{"liq_cue_in": 0}, {"liq_fade_in": 0}, {"liq_fade_out": 0}]
+        }
+      },
+      {
+        "location": ["../linx/DB269217", "../../aux/user/linx/DB269217"],
+        "identifier": ["urn:spawnid:DB269217"],
+        "title": "Dead Uncle Jones",
+        "creator": "Tin Tin Can",
+        "annotation": "",
+        "info": "",
+        "image": "",
+        "album": "The Devil and the Mockingbird",
+        "trackNum": 3,
+        "duration": 194652,
+        "link": [{"urn:ardrive:data_tx_id": "https://arweave.net/gsmELSjBpxEOvADsh0_qReFFIiUR_2WmDTxMlVkX92c"}],
+        "meta": [{"urn:ardrive:metadata_tx_id": "https://arweave.net/R_xqVr901QQOlRWNqfiY0RFhkImKxaY20W2nb6HSHPc"}],
+        "extension": {
+          "urn:spawnSPF:contract": ["https://arweave.net/tx/UAXgh2-GB7W9Hee55ZrC6kiHJ6q06qYzvW_JnXotTpk"],
+          "urn:liquidsoap:cue_fade": [{"liq_cue_in": 0}, {"liq_fade_in": 0}, {"liq_fade_out": 0}]
+        }
+      },
+      {
+        "location": ["../linx/62E46C61", "../../aux/user/linx/62E46C61"],
+        "identifier": ["urn:spawnid:62E46C61"],
+        "title": "The Devil and the Mockingbird",
+        "creator": "Tin Tin Can",
+        "annotation": "",
+        "info": "",
+        "image": "",
+        "album": "The Devil and the Mockingbird",
+        "trackNum": 4,
+        "duration": 268561,
+        "link": [{"urn:ardrive:data_tx_id": "https://arweave.net/ps3B5Jt_Tdz3P0FksH_9669m9JMpeczA5YXksnNQFdk"}],
+        "meta": [{"urn:ardrive:metadata_tx_id": "https://arweave.net/X28xO7fp2AxeyLRipKxLeJTAR8-GNF7Gs1ZHBpYKDvs"}],
+        "extension": {
+          "urn:spawnSPF:contract": ["https://arweave.net/tx/aHooKRWWLWzHakrGUMwYcjAR1ms4SAwJ8a-iNkxv2bw"],
+          "urn:liquidsoap:cue_fade": [{"liq_cue_in": 0}, {"liq_fade_in": 0}, {"liq_fade_out": 0}]
+        }
+      },
+      {
+        "location": ["../linx/553A6D7E", "../../aux/user/linx/553A6D7E"],
+        "identifier": ["urn:spawnid:553A6D7E"],
+        "title": "Distance From the Moon",
+        "creator": "Tin Tin Can",
+        "annotation": "",
+        "info": "",
+        "image": "",
+        "album": "The Devil and the Mockingbird",
+        "trackNum": 5,
+        "duration": 231920,
+        "link": [{"urn:ardrive:data_tx_id": "https://arweave.net/piYx5gRQLrHm_a8UMbmTCWM7-0iNmCKMNrZsHhdRPpc"}],
+        "meta": [{"urn:ardrive:metadata_tx_id": "https://arweave.net/jDG9hQ9wvyd9lrXhEAlWIfcTFYAIAbFe3ErAm17iPV0"}],
+        "extension": {
+          "urn:spawnSPF:contract": ["https://arweave.net/tx/SCoGjD-yJKuxbtbSlzj7irIlM2s3R9trI3uealrPWZs"],
+          "urn:liquidsoap:cue_fade": [{"liq_cue_in": 0}, {"liq_fade_in": 0}, {"liq_fade_out": 0}]
+        }
+      }
+    ]
+  }
+}
