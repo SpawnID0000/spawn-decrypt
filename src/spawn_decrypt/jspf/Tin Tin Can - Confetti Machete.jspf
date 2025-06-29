@@ -1,0 +1,113 @@
+{
+  "playlist": {
+    "title": "Confetti Machete",
+    "creator": "Tin Tin Can",
+    "annotation": "",
+    "info": "",
+    "location": "",
+    "identifier": "",
+    "image": "",
+    "date": "",
+    "license": "",
+    "attribution": [{"identifier": ""}, {"location": ""}],
+    "link": [{"urn:ardrive:data_tx_id": ""}],
+    "meta": [{"urn:ardrive:metadata_tx_id": ""}],
+    "extension": {
+      "urn:spawnSPF:type": ["ep"],
+      "urn:spawnSPF:total_duration": [1032867],
+      "urn:spawnSPF:total_tracks": [5]
+    },
+    "track": [
+      {
+        "location": ["../linx/817E0276", "../../aux/user/linx/817E0276"],
+        "identifier": ["urn:spawnid:817E0276"],
+        "title": "Funeral Waltz",
+        "creator": "Tin Tin Can",
+        "annotation": "",
+        "info": "",
+        "image": "",
+        "album": "Confetti Machete",
+        "trackNum": 1,
+        "duration": 182624,
+        "link": [{"urn:ardrive:data_tx_id": "https://arweave.net/JIBWA0aR1pMidOJdVPKA0dF15VyveppjWaMWBZR18eA"}],
+        "meta": [{"urn:ardrive:metadata_tx_id": "https://arweave.net/srFwJWnIJLjSwbw32HoP3f0V1MIXB6-V9sCygj_qU8E"}],
+        "extension": {
+          "urn:spawnSPF:contract": ["https://arweave.net/tx/GjaS3NuL3RLNbESWrWOxhxWY05XFKVEkn16fg-s85nI"],
+          "urn:liquidsoap:cue_fade": [{"liq_cue_in": 0}, {"liq_fade_in": 0}, {"liq_fade_out": 0}]
+        }
+      },
+      {
+        "location": ["../linx/266ED409", "../../aux/user/linx/266ED409"],
+        "identifier": ["urn:spawnid:266ED409"],
+        "title": "Sex, Lies, and Lightning Bolts",
+        "creator": "Tin Tin Can",
+        "annotation": "",
+        "info": "",
+        "image": "",
+        "album": "Confetti Machete",
+        "trackNum": 2,
+        "duration": 263244,
+        "link": [{"urn:ardrive:data_tx_id": "https://arweave.net/w-pD6PUVAFVX4gmUwfKjUCLMsQduwfdWmDIerZ2jsYA"}],
+        "meta": [{"urn:ardrive:metadata_tx_id": "https://arweave.net/QlbCcXnM0G2wuEJeI0Svi4jsf7gcLcPIvpmULBodiJc"}],
+        "extension": {
+          "urn:spawnSPF:contract": ["https://arweave.net/tx/C4lox0-FK7Qknc6cn3dOJEUkp1BMzSvBg57AbKtwOIA"],
+          "urn:liquidsoap:cue_fade": [{"liq_cue_in": 0}, {"liq_fade_in": 0}, {"liq_fade_out": 0}]
+        }
+      },
+      {
+        "location": ["../linx/CC761B20", "../../aux/user/linx/CC761B20"],
+        "identifier": ["urn:spawnid:CC761B20"],
+        "title": "I Ain't Your Man",
+        "creator": "Tin Tin Can",
+        "annotation": "",
+        "info": "",
+        "image": "",
+        "album": "Confetti Machete",
+        "trackNum": 3,
+        "duration": 153182,
+        "link": [{"urn:ardrive:data_tx_id": "https://arweave.net/ql1YmUDcUNrv5GbGr2s1LZuueyQqRKOQ5E733Tw9PSo"}],
+        "meta": [{"urn:ardrive:metadata_tx_id": "https://arweave.net/O3jmTBJsdZbyaI-H2VDWH7T5txT2W4-BCMaz3k8Xgrs"}],
+        "extension": {
+          "urn:spawnSPF:contract": ["https://arweave.net/tx/IicogvIfRef4CIHx1bkqbWz-k9pIZQXti08xyuPFlJo"],
+          "urn:liquidsoap:cue_fade": [{"liq_cue_in": 0}, {"liq_fade_in": 0}, {"liq_fade_out": 0}]
+        }
+      },
+      {
+        "location": ["../linx/EACB831D", "../../aux/user/linx/EACB831D"],
+        "identifier": ["urn:spawnid:EACB831D"],
+        "title": "Confetti Machete",
+        "creator": "Tin Tin Can",
+        "annotation": "",
+        "info": "",
+        "image": "",
+        "album": "Confetti Machete",
+        "trackNum": 4,
+        "duration": 229366,
+        "link": [{"urn:ardrive:data_tx_id": "https://arweave.net/X7E4jLxL-FFe2JTqLOQnqtzT8_isf3nHewcNoPdtGu0"}],
+        "meta": [{"urn:ardrive:metadata_tx_id": "https://arweave.net/_qtXu3YI2TIclb4WYvcH4HITd5Rt9dNMtRrvDA5lyLs"}],
+        "extension": {
+          "urn:spawnSPF:contract": ["https://arweave.net/tx/lRjPoRdHh9y6wiu9jOdwAPVdlP0S_B8W6PkiB8Zo1WU"],
+          "urn:liquidsoap:cue_fade": [{"liq_cue_in": 0}, {"liq_fade_in": 0}, {"liq_fade_out": 0}]
+        }
+      },
+      {
+        "location": ["../linx/4350B5A8", "../../aux/user/linx/4350B5A8"],
+        "identifier": ["urn:spawnid:4350B5A8"],
+        "title": "Animal Bones",
+        "creator": "Tin Tin Can",
+        "annotation": "",
+        "info": "",
+        "image": "",
+        "album": "Confetti Machete",
+        "trackNum": 5,
+        "duration": 204451,
+        "link": [{"urn:ardrive:data_tx_id": "https://arweave.net/YL8kJEq32gu2LkZpimxf8Cl-aWaiMXL4Ef5ptnvzNhM"}],
+        "meta": [{"urn:ardrive:metadata_tx_id": "https://arweave.net/qEy05yFzzVV3cF74y9Nql9ie5SVkBiI7aDhhCD0xsmw"}],
+        "extension": {
+          "urn:spawnSPF:contract": ["https://arweave.net/tx/SaDBvUb77AnOhtnU44K7AGn_BT3UfqORJ1uZ8tq6wuo"],
+          "urn:liquidsoap:cue_fade": [{"liq_cue_in": 0}, {"liq_fade_in": 0}, {"liq_fade_out": 0}]
+        }
+      }
+    ]
+  }
+}
