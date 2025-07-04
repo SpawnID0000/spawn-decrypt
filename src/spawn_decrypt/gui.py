@@ -15,12 +15,11 @@ import contextlib
 
 from tkinter import ttk, filedialog
 from pathlib import Path
-from PIL import Image, ImageTk
 
 from dotenv import load_dotenv, set_key
-from .author import authorize, compute_arweave_address
-from .decrypt import decrypt_asset
-from .wallet_gen import save_wallet_jwk
+from spawn_decrypt.author import authorize, compute_arweave_address
+from spawn_decrypt.decrypt import decrypt_asset
+from spawn_decrypt.wallet_gen import save_wallet_jwk
 from requests.exceptions import JSONDecodeError
 
 def sync_remote_directory(owner: str, repo: str, branch: str, subdir: str, local_dir: Path):

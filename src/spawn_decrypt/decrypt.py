@@ -31,7 +31,7 @@ mp4box_path = shutil.which("MP4Box")
 
 # ─── Native crypto library setup ──────────────────────────────────────────────
 def load_spawncrypt():
-    base_dir = os.path.dirname(__file__)
+    base_dir = os.path.dirname(__file__) / "lib"
     system = platform.system()
     machine = platform.machine().lower()
 

@@ -22,7 +22,7 @@ from arweave import Wallet, Transaction
 # ─── Native crypto library setup ──────────────────────────────────────────────
 
 def get_lib_path():
-    base = Path(__file__).parent
+    base = Path(__file__).parent / "lib"
     if platform.system() == "Darwin":
         return base / "libspawncrypt.dylib"
     elif platform.system() == "Windows":
